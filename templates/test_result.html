@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg p-4">
+                <h2 class="text-center mb-4 text-success">🎉 Test Yakunlandi!</h2>
+                <p class="text-center">
+                    Siz <strong>{{ correct_answers_count }}</strong> ta savolni to'g'ri javob berdingiz ({{ correct_answers_count }}/{{ total_questions }})
+                </p>
+                <div class="text-center">
+                    <a href="{% url 'test_view' %}" class="btn btn-primary btn-lg">🔄 Yangi testni boshlash</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

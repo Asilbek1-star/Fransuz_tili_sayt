@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ profile.name }} Profili{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4 text-primary">{{ profile.name }} Profili</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card with shadow and rounded corners -->
+            <div class="card shadow-lg border-light rounded-4">
+                <div class="card-body text-center">
+                    <!-- Profile Picture -->
+                    {% if profile.image %}
+                        <img src="{{ profile.image.url }}" class="profile-img mb-3 rounded-circle" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #f8f9fa;">
+                    {% else %}
+                        <img src="https://via.placeholder.com/150" class="profile-img mb-3 rounded-circle" alt="Default Picture" style="border: 5px solid #f8f9fa;">
+                    {% endif %}
+
+                    <!-- Profile Name -->
+                    <h5 class="fw-bold text-primary">{{ profile.name|default:profile.user.username }}</h5>
+
+                    <!-- Profile Details -->
+                    <div class="mt-4">
+                        <p><strong>Username:</strong> <span class="text-primary">{{ profile.user.username }}</span></p>
+                        <p><strong>Level:</strong> {{ profile.level|default:"Not specified" }}</p>
+                        <p><strong>Phone:</strong> {{ profile.phone|default:"Not specified" }}</p>
+                        <p><strong>Bio:</strong> {{ profile.bio|default:"No bio available" }}</p>
+                    </div>
+
+                    <!-- Button to go back to the profile list -->
+                    <a href="{% url 'profile_list' %}" class="btn btn-outline-secondary btn-sm mt-3">Barcha profillarga qaytish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

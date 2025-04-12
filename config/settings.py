@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'User',
 ]
 
@@ -103,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uz'
 
 TIME_ZONE = 'UTC'
 
@@ -115,7 +116,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# Statik fayllar uchun asosiy yo‘l (fayllarni qayerdan olish kerak)
+STATIC_URL = '/static/'
+
+# Statik fayllarni loyiha ichida qayerdan topish kerak (masalan, static papkasi)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# collectstatic komandasi statik fayllarni qayerga yig‘ishi kerak
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -125,3 +135,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
+SESSION_COOKIE_AGE = 31536000  # 60*60*24*365
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'

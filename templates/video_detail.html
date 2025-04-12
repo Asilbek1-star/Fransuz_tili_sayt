@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+
+{% block title %}{{ video.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <!-- Sarlavha -->
+            <h3 class="text-center text-primary fw-bold mb-4">{{ video.title }}</h3>
+
+            <!-- Video -->
+            <div class="mb-4 text-center" style="background-color: #000; padding: 10px; border-radius: 8px;">
+                <video width="100%" style="max-height: 450px; object-fit: contain;" controls>
+                    <source src="{{ video.video_file.url }}" type="video/mp4">
+                    Sizning brauzeringiz video formatini qo‘llab-quvvatlamaydi.
+                </video>
+            </div>
+
+            <!-- Ma'lumotlar -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <p><strong>Level:</strong> {{ video.get_level_display }}</p>
+                    <p><strong>Category:</strong> {{ video.get_category_display }}</p>
+                    <p><strong>Qisqacha:</strong> {{ video.description|default:"Izoh mavjud emas." }}</p>
+                    <p><strong>Prosmotirlar soni:</strong> {{ video.views }}</p>
+                    <a href="{% url 'video_list' %}" class="btn btn-outline-secondary btn-sm mt-2">Barcha videolarga qaytish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

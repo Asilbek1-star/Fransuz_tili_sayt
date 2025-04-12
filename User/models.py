@@ -15,22 +15,49 @@ class Profile(models.Model):
         return self.name
 
 
+
 class Video(models.Model):
     LEVEL_CHOICES = [
         ('A1', 'A1'),
         ('A2', 'A2'),
+        ('A3', 'A3'),
         ('B1', 'B1'),
         ('B2', 'B2'),
+        ('B3', 'B3'),
         ('C1', 'C1'),
     ]
-    title = models.CharField(max_length=200)  # Video nomi
-    level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default='A1')  # Ingliz tili darajasi
-    video_file = models.FileField(upload_to='videos/')  # Video fayl
+
+    CATEGORY_CHOICES = [
+        ('grammar', 'Grammar'),
+        ('vocabulary', 'Vocabulary'),
+        ('listening', 'Listening'),
+        ('speaking', 'Speaking'),
+        ('writing', 'Writing'),
+    ]
+
+    title = models.CharField(max_length=200)
+    level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default='A1')
+    video_file = models.FileField(upload_to='videos/')
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='grammar')
+    created_at = models.DateTimeField(auto_now_add=True)
+    views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
 
 
 
+class Question(models.Model):
+    text = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.text
 
 
+class Answer(models.Model):
+    question = models.ForeignKey(Question, related_name='answers', on_delete=models.CASCADE)
+    text = models.CharField(max_length=255)
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.text

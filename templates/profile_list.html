@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Barcha Profillar{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">Barcha foydalanuvchilar profili</h2>
+
+    {% if profiles %}
+        <div class="row g-4">
+            {% for profile in profiles %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card profile-card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            {% if profile.image %}
+                                <img src="{{ profile.image.url }}" class="profile-img mb-3 rounded-circle" style="width: 120px;" alt="Profile Picture">
+                            {% else %}
+                                <img src="https://via.placeholder.com/120" class="profile-img mb-3 rounded-circle" alt="Default Picture">
+                            {% endif %}
+                            <h5 class="fw-bold">{{ profile.name|default:profile.user.username }}</h5>
+                            <p><strong>Level:</strong> {{ profile.level|default:"Not specified" }}</p>
+                            <p><strong>Phone:</strong> {{ profile.phone|default:"Not specified" }}</p>
+                            <p><strong>Bio:</strong> {{ profile.bio|default:"No bio available" }}</p>
+                            <a href="{% url 'single_profile' profile.user.username %}" class="btn btn-primary btn-sm mt-2">Profilni ko‘rish</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center" role="alert">
+            Hozircha hech qanday profil mavjud emas.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

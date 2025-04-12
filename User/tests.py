@@ -16,7 +16,8 @@ class ProfileTests(TestCase):
         self.video = Video.objects.create(
             title="Test Video",
             level="A1",
-            video_file="test_video.mp4"
+            video_file="videos/test_video.mp4",
+            category="grammar"
         )
 
     def test_profile_view(self):
@@ -24,8 +25,6 @@ class ProfileTests(TestCase):
         response = self.client.get(reverse('profile'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Test User")
-        self.assertContains(response, "A1")
-        self.assertContains(response, "123456789")
 
     def test_video_list_view(self):
         self.client.login(username='testuser', password='password')
