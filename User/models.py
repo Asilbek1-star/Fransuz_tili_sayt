@@ -61,3 +61,13 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    level = models.CharField(max_length=10)
+    phone = models.CharField(max_length=20)
+    bio = models.TextField()
+
+    def __str__(self):
+        return self.name

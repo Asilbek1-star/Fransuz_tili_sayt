@@ -1,16 +1,18 @@
+from django.db.models import Sum
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .models import Profile, Video, Question
 from .forms import CustomUserCreationForm
-from django.db.models import Sum
 
 
 
 def profiles_list(request):
+    profile = Profile.objects.annotate(total_score=Sum('user__testresult__score')).order_by('-total_score')
     return render(request, 'profile_list.html', {
-        'profiles': Profile.objects.all()
+        'profiles': Profile.objects.all(),
+        'profile': profile,
     })
 
 
@@ -64,7 +66,6 @@ def user_login(request):
     return render(request, 'login.html', {'form': form})
 
 
-
 def single_profile(request, username):
     profile = get_object_or_404(Profile, user__username=username)
     all_profiles = Profile.objects.all()
@@ -78,23 +79,33 @@ def single_profile(request, username):
 
 def test_view(request):
     questions = Question.objects.all()
+
     if request.method == 'POST':
-        correct_answers = sum(
-            1 for q in questions
-            if (answer_id := request.POST.get(f'question_{q.id}')) and
-               q.answers.filter(id=answer_id, is_correct=True).exists()
-        )
-        request.session['correct_answers_count'] = correct_answers
-        request.session['total_questions'] = questions.count()
-        return redirect('test_result')
+        correct_answers = 0
+
+        # Loop through all questions and check if the correct answer is selected
+        for q in questions:
+            answer_id = request.POST.get(f'question_{q.id}')
+            if answer_id:
+                if q.answers.filter(id=answer_id, is_correct=True).exists():
+                    correct_answers += 1
+
+        # Optionally, display the result to the user
+        return render(request, 'test_result.html',
+                      {'correct_answers': correct_answers, 'total_questions': questions.count()})
+
+    # Render the test page with the list of questions
     return render(request, 'test_page.html', {'questions': questions})
 
 
 def test_result(request):
     correct = request.session.get('correct_answers_count')
     total = request.session.get('total_questions')
+
     if correct is None or total is None:
+        messages.error(request, "Test hali yozilmagan!")
         return redirect('test_view')
+
     return render(request, "test_result.html", {
         "correct_answers_count": correct,
         "total_questions": total,
