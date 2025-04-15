@@ -11,7 +11,6 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Bootstrap classlarini qo‘shish
         for field in self.fields.values():
             field.widget.attrs.update({'class': 'form-control'})
 

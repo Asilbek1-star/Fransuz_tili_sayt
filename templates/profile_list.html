@@ -8,24 +8,44 @@
 
     {% if profiles %}
         <div class="row g-4">
-            {% for profile in profiles %}
-                <div class="col-md-6 col-lg-4">
-                    <div class="card profile-card h-100 shadow-sm">
-                        <div class="card-body text-center">
-                            {% if profile.image %}
-                                <img src="{{ profile.image.url }}" class="profile-img mb-3 rounded-circle" style="width: 120px;" alt="Profile Picture">
-                            {% else %}
-                                <img src="https://via.placeholder.com/120" class="profile-img mb-3 rounded-circle" alt="Default Picture">
-                            {% endif %}
-                            <h5 class="fw-bold">{{ profile.name|default:profile.user.username }}</h5>
-                            <p><strong>Level:</strong> {{ profile.level|default:"Not specified" }}</p>
-                            <p><strong>Phone:</strong> {{ profile.phone|default:"Not specified" }}</p>
-                            <p><strong>Bio:</strong> {{ profile.bio|default:"No bio available" }}</p>
-                            <a href="{% url 'single_profile' profile.user.username %}" class="btn btn-primary btn-sm mt-2">Profilni ko‘rish</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+{% for profile in profiles %}
+    <div class="col-md-6 col-lg-4">
+        {% if profile.name == "Xurshid" %}
+        <!-- Xurshid foydalanuvchilar uchun -->
+        <div class="card profile-card h-100 shadow-lg border-2 border-primary position-relative special-xurshid" style="background: linear-gradient(135deg, #f0f8ff, #e6f0ff);">
+            <div class="card-body text-center">
+                <span class="badge bg-success position-absolute top-0 end-0 m-2">VIP</span>
+                {% if profile.image %}
+                    <img src="{{ profile.image.url }}" class="profile-img mb-3 rounded-circle border border-3 border-primary" style="width: 130px;" alt="Profile Picture">
+                {% else %}
+                    <img src="https://via.placeholder.com/130" class="profile-img mb-3 rounded-circle" alt="Default Picture">
+                {% endif %}
+                <h5 class="fw-bold text-primary">{{ profile.name }}</h5>
+                <p><strong>Level:</strong> {{ profile.level|default:"Not specified" }}</p>
+                <p><strong>Phone:</strong> {{ profile.phone|default:"Not specified" }}</p>
+                <p><strong>Bio:</strong> {{ profile.bio|default:"No bio available" }}</p>
+                <a href="{% url 'single_profile' profile.user.username %}" class="btn btn-outline-primary btn-sm mt-2">Profilni ko‘rish</a>
+            </div>
+        </div>
+        {% else %}
+        <!-- Oddiy foydalanuvchilar uchun -->
+        <div class="card profile-card h-100 shadow-sm">
+            <div class="card-body text-center">
+                {% if profile.image %}
+                    <img src="{{ profile.image.url }}" class="profile-img mb-3 rounded-circle" style="width: 120px;" alt="Profile Picture">
+                {% else %}
+                    <img src="https://via.placeholder.com/120" class="profile-img mb-3 rounded-circle" alt="Default Picture">
+                {% endif %}
+                <h5 class="fw-bold">{{ profile.name|default:profile.user.username }}</h5>
+                <p><strong>Level:</strong> {{ profile.level|default:"Not specified" }}</p>
+                <p><strong>Phone:</strong> {{ profile.phone|default:"Not specified" }}</p>
+                <p><strong>Bio:</strong> {{ profile.bio|default:"No bio available" }}</p>
+                <a href="{% url 'single_profile' profile.user.username %}" class="btn btn-primary btn-sm mt-2">Profilni ko‘rish</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endfor %}
         </div>
     {% else %}
         <div class="alert alert-warning text-center" role="alert">

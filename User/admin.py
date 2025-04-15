@@ -24,7 +24,7 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
     list_display = ('title', 'level', 'category', 'views', 'created_at')
-    search_fields = ('title', 'description')
+    search_fields = ('title',)
 
 
 class AnswerInline(admin.TabularInline):

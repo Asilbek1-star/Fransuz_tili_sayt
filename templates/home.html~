@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Bosh Sahifa | E-Learning{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+<section class="using-section mt-5 py-5 px-3" style="background: linear-gradient(135deg, #f0f4ff, #ffffff);">
+    <div class="container">
+        <h3 class="mb-5 text-center fw-bold display-6">📘 E-Learning Platformasidan Xush kelibsiz!</h3>
+        <div class="row g-4">
+
+    <!-- Trenddagi Videolar -->
+    <h3>📈 Trenddagi Videolar</h3>
+    <div class="row g-4">
+        {% for video in trending %}
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <div class="card border-0 shadow-sm rounded-3" style="max-width: 320px; margin: auto;">
+                <div class="ratio ratio-16x9">
+                    {% if video.thumbnail %}
+                    <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}" class="w-100 h-100" style="object-fit: cover;">
+                    {% else %}
+                    <video class="w-100 h-100" muted preload="metadata" style="object-fit: cover;">
+                        <source src="{{ video.video_file.url }}#t=0.5" type="video/mp4">
+                        Sizning brauzeringiz video formatini qo‘llab-quvvatlamaydi.
+                    </video>
+                    {% endif %}
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <p class="card-text text-muted">Ko‘rishlar: {{ video.views }}</p>
+                    <a href="{% url 'video_detail' video.id %}" class="btn btn-primary btn-sm w-100 mt-2">Ko‘rish</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Yangi Videolar -->
+    <h3 class="mt-5">🆕 Yangi Videolar</h3>
+    <div class="row g-4">
+        {% for video in latest_videos %}
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <div class="card border-0 shadow-sm rounded-3" style="max-width: 320px; margin: auto;">
+                <div class="ratio ratio-16x9">
+                    {% if video.thumbnail %}
+                    <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}" class="w-100 h-100" style="object-fit: cover;">
+                    {% else %}
+                    <video class="w-100 h-100" muted preload="metadata" style="object-fit: cover;">
+                        <source src="{{ video.video_file.url }}#t=0.5" type="video/mp4">
+                        Sizning brauzeringiz video formatini qo‘llab-quvvatlamaydi.
+                    </video>
+                    {% endif %}
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <a href="{% url 'video_detail' video.id %}" class="btn btn-success btn-sm w-100 mt-2">Ko‘rish</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- "Barchasini ko‘rish" tugmasi -->
+    <div class="text-center my-4">
+        <a href="{% url 'video_list' %}" class="btn btn-primary px-4 py-2">Barchasini ko‘rish</a>
+    </div>
+
+            <!-- Qo‘llanma Bo‘limi -->
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <h4 class="fw-bold text-primary mb-2">🔍 1. Kategoriyalarni Kashf Qiling</h4>
+                    <p class="text-muted">📚 Grammatika, 🧠 leksika, 🎧 tinglash, 🗣️ gapirish va boshqa kategoriyalar orqali tilni mukammal o‘rganing.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <h4 class="fw-bold text-success mb-2">📝 2. Testlardan O‘ting</h4>
+                    <p class="text-muted">🎯 Har bir darsdan so‘ng testlarni bajarib, bilimlaringizni mustahkamlang va o‘zingizni sinab ko‘ring.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <h4 class="fw-bold text-warning mb-2">📊 3. Yutuqlaringizni Kuzating</h4>
+                    <p class="text-muted">🚀 Taraqqiyotingizni grafikalar, ballar va yutuqlar orqali kuzatib boring.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <h4 class="fw-bold text-danger mb-2">🤝 4. Boshqalar Bilan Aloqa Qiling</h4>
+                    <p class="text-muted">💬 Fikrlar yozing, 💡 savollar bering va 🌐 jamoa bilan fikr almashing.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- Tavsiya etilgan Videolar -->
+    <h3 class="mt-5">🎯 Tavsiya etilgan Videolar</h3>
+    <div class="row g-4">
+        {% for video in recommended_videos %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="card border-0 shadow-sm rounded-3" style="max-width: 300px; margin: auto;">
+                <div class="ratio ratio-16x9">
+                    {% if video.thumbnail %}
+                    <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}" class="w-100 h-100" style="object-fit: cover;">
+                    {% else %}
+                        {% if video.video_file %}
+                        <video class="w-100 h-100" muted preload="metadata" style="object-fit: cover;">
+                            <source src="{{ video.video_file.url }}#t=0.5" type="video/mp4">
+                            Sizning brauzeringiz video formatini qo‘llab-quvvatlamaydi.
+                        </video>
+                        {% else %}
+                        <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 100%;">
+                            <p class="m-0">Rasm yoki video mavjud emas</p>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="card-body text-center">
+                    <h6 class="card-title">{{ video.title }}</h6>
+                    <p class="card-text text-muted">Ko‘rishlar: {{ video.views }}</p>
+                    <a href="{% url 'video_detail' video.id %}" class="btn btn-outline-primary btn-sm w-100 mt-2">Ko‘rish</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
