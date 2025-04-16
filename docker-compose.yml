@@ -21,7 +21,7 @@ services:
       - ./static:/app/static
       - ./media:/app/media
     depends_on:
-      - web
+      - app
     networks:
       - app-network
 
