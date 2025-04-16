@@ -17,4 +17,4 @@ COPY . .
 RUN python manage.py collectstatic --noinput --clear
 
 # Gunicorn bilan Django serverni ishga tushurish
-CMD ["gunicorn", "--bind", "0.0.0.0:8019", "config.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8052", "config.wsgi:application"]
