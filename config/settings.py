@@ -66,7 +66,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'django_error.log',
+            'filename': 'error.log',
         },
     },
     'loggers': {
@@ -77,6 +77,7 @@ LOGGING = {
         },
     },
 }
+
 
 
 CORS_ALLOW_METHODS = [
