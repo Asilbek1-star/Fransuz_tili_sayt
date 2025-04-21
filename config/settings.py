@@ -193,3 +193,10 @@ if os.environ.get('DJANGO_DEBUG', '') == 'True':
     MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
 
 ALLOWED_HOSTS = ['194.242.56.190']
+
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'  # Redis broker URL
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'  # Redis backend
+CELERY_TIMEZONE = 'UTC'
