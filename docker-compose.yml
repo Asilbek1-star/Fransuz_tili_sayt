@@ -1,4 +1,7 @@
+version: '3'
+
 services:
+  # Django ilovasi
   app:
     build: .
     volumes:
@@ -9,42 +12,46 @@ services:
       - PYTHONUNBUFFERED=1
     networks:
       - app-network
+    command: gunicorn --bind 0.0.0.0:8000 config.wsgi:application  # Gunicorn orqali Django ilovasini ishga tushurish
 
+  # Nginx (Web server)
   nginx:
     image: nginx:latest
     ports:
-      - "404:404"
+      - "404:404"  # Nginx 404-portini ochamiz
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - static-data:/app/staticfiles
-      - media-data:/app/media
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf  # Nginx konfiguratsiyasi
+      - static-data:/app/staticfiles  # Statik fayllar
+      - media-data:/app/media  # Media fayllar
     depends_on:
-      - app
+      - app  # Nginx ilovadan keyin ishga tushadi
     networks:
       - app-network
 
+  # Redis
   redis:
     image: redis:7.2-alpine
     ports:
-      - "6380:6380"
+      - "6380:6380"  # Redisni 6380 portida ishga tushirish
     networks:
       - app-network
 
+  # Celery
   celery:
     build: .
-    command: celery -A config worker --loglevel=info
+    command: celery -A config.celery.app worker --loglevel=info  # Celeryni ishga tushirish
     volumes:
       - .:/app
     depends_on:
-      - redis
-      - app
+      - redis  # Redis bo‘lishi kerak
+      - app  # Django ilovasi bo‘lishi kerak
     networks:
       - app-network
 
 networks:
   app-network:
-    driver: bridge
+    driver: bridge  # Tarmoqlarni sozlash
 
 volumes:
-  static-data:
-  media-data:
+  static-data:  # Statik fayllar uchun volyum
+  media-data:   # Media fayllar uchun volyum
