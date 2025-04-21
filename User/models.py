@@ -44,6 +44,7 @@ class Video(models.Model):
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='grammar')
     created_at = models.DateTimeField(auto_now_add=True)
     views = models.PositiveIntegerField(default=0)
+    thumbnail = models.ImageField(upload_to='video_thumbnails/', blank=True, null=True)
 
     def __str__(self):
         return self.title
