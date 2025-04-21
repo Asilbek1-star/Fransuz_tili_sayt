@@ -19,6 +19,8 @@
                     {% if video.thumbnail %}
                     <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}" class="w-100 h-100" style="object-fit: cover;">
                     {% else %}
+                    <!-- Placeholder for missing thumbnail -->
+                    <img src="{% static 'default-thumbnail.jpg' %}" alt="Default Thumbnail" class="w-100 h-100" style="object-fit: cover;">
                     <video class="w-100 h-100" muted preload="metadata" style="object-fit: cover;">
                         <source src="{{ video.video_file.url }}#t=0.5" type="video/mp4">
                         Sizning brauzeringiz video formatini qo‘llab-quvvatlamaydi.
