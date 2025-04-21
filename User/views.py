@@ -112,12 +112,16 @@ def test_result(request):
     })
 
 
+from django.shortcuts import render
+from .models import Video
+
 def home(request):
     return render(request, 'home.html', {
         'trending': Video.objects.order_by('-views')[:6],
         'latest_videos': Video.objects.order_by('-created_at')[:5],
         'recommended_videos': Video.objects.order_by('?')[:5],
     })
+
 
 
 def logout_view(request):
