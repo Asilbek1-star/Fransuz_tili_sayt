@@ -192,8 +192,7 @@ if os.environ.get('DJANGO_DEBUG', '') == 'True':
     INSTALLED_APPS += ['debug_toolbar']
     MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
 
-ALLOWED_HOSTS = ['194.242.56.190']
-
+ALLOWED_HOSTS = ['194.242.56.190', 'localhost', '127.0.0.1']
 
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'  # Redis broker URL
