@@ -1,11 +1,12 @@
+version: '3'
 
 services:
   app:
     build: .
     volumes:
       - .:/app
-      - static-data:/app/staticfiles  # Statik fayllar uchun
-      - media-data:/app/media  # Media fayllar uchun
+      - static-data:/app/staticfiles  # Statik fayllar
+      - media-data:/app/media  # Media fayllar
     environment:
       - PYTHONUNBUFFERED=1
     networks:
@@ -14,11 +15,11 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "404:404"
+      - "404:404"  # Nginx 404-portini ochamiz
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf  # Nginx konfiguratsiyasi
       - static-data:/app/staticfiles  # Statik fayllar
-      - media-data:/app/media  # Media fayllar (agar kerak bo‘lsa)
+      - media-data:/app/media  # Media fayllar
     depends_on:
       - app
     networks:
