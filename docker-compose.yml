@@ -18,7 +18,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "404:404"  # Nginx 404-portini ochamiz
+      - "404:80"  # Nginxni port 80da ishga tushiradi
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf  # Nginx konfiguratsiyasi
       - static-data:/app/staticfiles  # Statik fayllar
@@ -32,7 +32,7 @@ services:
   redis:
     image: redis:7.2-alpine
     ports:
-      - "6380:6380"  # Redisni 6380 portida ishga tushirish
+      - "6379:6379"  # Redisni default portda ishga tushirish
     networks:
       - app-network
 
