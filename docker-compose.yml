@@ -32,7 +32,7 @@ services:
   redis:
     image: redis:7.2-alpine
     ports:
-      - "6379:6379"  # Redisni default portda ishga tushirish
+      - "6370:6380"  # Redisni default portda ishga tushirish
     networks:
       - app-network
 
