@@ -183,3 +183,7 @@ SESSION_COOKIE_AGE = 31536000  # 60*60*24*365
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+if os.environ.get('DJANGO_DEBUG', '') == 'True':
+    INSTALLED_APPS += ['debug_toolbar']
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
