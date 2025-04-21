@@ -54,6 +54,9 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
+INTERNAL_IPS = [
+    '194.242.56.190',  # localhost
+]
 
 # CORS sozlamalari
 CORS_ALLOW_ALL_ORIGINS = True
