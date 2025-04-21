@@ -14,7 +14,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "256:256"
+      - "121:121"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static-data:/app/staticfiles  # Statik fayllar
