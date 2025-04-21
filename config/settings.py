@@ -195,6 +195,7 @@ if os.environ.get('DJANGO_DEBUG', '') == 'True':
 ALLOWED_HOSTS = ['194.242.56.190']
 
 
+
 CELERY_BROKER_URL = 'redis://redis:6379/0'  # Redis broker URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
