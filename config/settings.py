@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-a-$^p+k&&r0axo-o2f0n8!vz-2=8ees3ja!&&4clz-u2xpg0$c
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['http://194.242.56.190:256']
 
 
 # Application definition
@@ -54,7 +55,6 @@ MIDDLEWARE = [
 
 # CORS sozlamalari
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 
 CORS_ALLOW_METHODS = [
