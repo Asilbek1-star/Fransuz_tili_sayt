@@ -12,8 +12,7 @@ services:
       - PYTHONUNBUFFERED=1
     networks:
       - app-network
-    command: gunicorn --bind 0.0.0.0:8000 config.wsgi:application  # Gunicorn orqali Django ilovasini ishga tushurish
-
+    command: gunicorn --bind 0.0.0.0:8052 config.wsgi:application  # Gunicorn orqali Django ilovasini ishga tushurish
   # Nginx (Web server)
   nginx:
     image: nginx:latest
