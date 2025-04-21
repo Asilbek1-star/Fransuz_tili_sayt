@@ -23,10 +23,6 @@
                     {% else %}
                     <!-- Placeholder for missing thumbnail -->
                     <img src="{% static 'default-thumbnail.jpg' %}" alt="Default Thumbnail" class="w-100 h-100" style="object-fit: cover;">
-                    <video class="w-100 h-100" muted preload="metadata" style="object-fit: cover;">
-                        <source src="{{ video.video_file.url }}#t=0.5" type="video/mp4">
-                        Sizning brauzeringiz video formatini qo‘llab-quvvatlamaydi.
-                    </video>
                     {% endif %}
                 </div>
                 <div class="card-body text-center">
@@ -69,8 +65,8 @@
         <a href="{% url 'video_list' %}" class="btn btn-primary px-4 py-2">Barchasini ko‘rish</a>
     </div>
 
-            <!-- Qo‘llanma Bo‘limi -->
-            <section class="using-section mt-5 py-5 px-3" style="background: linear-gradient(135deg, #f0f4ff, #ffffff);">
+    <!-- Qo‘llanma Bo‘limi -->
+    <section class="using-section mt-5 py-5 px-3" style="background: linear-gradient(135deg, #f0f4ff, #ffffff);">
         <div class="container">
             <h3 class="mb-5 text-center fw-bold display-6">📘 E-Learning Platformasi haqida qisqacha ma'lumot</h3>
         <div class="row g-4">
